@@ -1,0 +1,11 @@
+@import '../../variables';
+
+// Global styles
+
+body {
+  font-family: $font-family;
+  color: $text-color;
+  background-color: $base-color;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,91 @@
+@import '../../variables';
+
+.movies-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: $spacing * 2;
+
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+.movie-item {
+  text-decoration: none;
+  color: $text-color;
+  background-color: lighten($base-color, 9%);
+  border-radius: $roundness;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.03);
+
+    .movie-item__rating {
+      background-color: lighten($primary-color, 10%);
+    }
+  }
+
+  &__poster {
+    width: 100%;
+    height: auto;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: $spacing;
+  }
+
+  &__title-container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: $spacing;
+    text-align: center;
+  }
+
+  &__description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+
+  &__description {
+    font-size: 1rem;
+    color: darken($text-color, 25%);
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 5; /* Number of lines to show */
+    -webkit-line-clamp: 5; 
+    -webkit-box-orient: vertical; 
+    height: 5.7rem;
+    line-height: 1.25rem;
+    margin-bottom: $spacing * 2;
+    padding: $spacing;
+  }
+
+  &__rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $spacing * 2;
+    font-weight: bold;
+    color: $base-color;
+    background-color: $primary-color;
+    flex-shrink: 0;
+    border-radius: $roundness;
+  }
+}

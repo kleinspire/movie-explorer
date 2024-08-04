@@ -1,0 +1,99 @@
+@import '../../variables';
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: $breakpoint-lg) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  &__poster {
+    flex-shrink: 0;
+    img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: $roundness;
+    }
+  }
+
+  &__details {
+    margin-top: 1rem;
+
+    @media (min-width: $breakpoint-lg) {
+      margin-top: 0;
+      margin-left: $spacing * 4;
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    margin-bottom: 0;
+    color: lighten($text-color, 20%);
+  }
+
+  &__tagline {
+    font-size: 1.2rem;
+    color: $primary-color;
+    margin-top: $spacing * 2;
+    margin-bottom: $spacing * 3;
+  }
+
+  &__overview {
+    margin-top: 0;
+    margin-bottom: $spacing * 4;
+    color: darken($text-color, 15%); 
+  }
+
+  &__info {
+    background-color: lighten($base-color, 10%);
+    padding: $spacing * 3;
+    border-radius: $roundness;
+
+    .movie__grid {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing * 1.5;
+
+      .movie__row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap; // Ensure that label and value stay on the same line
+        align-items: center; // Vertically center the items
+
+        @media (max-width: $breakpoint-sm) {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      .movie__label {
+        font-weight: bold;
+        flex: 0 0 150px; // Fixed width for label
+        margin-right: $spacing * 0.2;
+        color: darken($text-color, 10%);
+      }
+
+      .movie__value {
+        color: lighten($text-color, 20%);
+        flex: 1;
+        overflow-wrap: anywhere; // Handle long words by breaking them
+        margin-left: $spacing * 0.2;
+      }
+    }
+  }
+
+  &__rating {
+    margin-top: $spacing * 2;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $base-color;
+    background-color: $primary-color;
+    padding: $spacing $spacing * 2;
+    border-radius: $roundness;
+    align-self: flex-start;
+  }
+}

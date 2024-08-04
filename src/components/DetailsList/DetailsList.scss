@@ -1,0 +1,44 @@
+@import '../../variables';
+
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing * 1.5;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  &__label {
+    font-weight: bold;
+    flex: 0 0 150px;
+    margin-right: $spacing * 0.2;
+    color: lighten($text-color, 20%);
+  }
+
+  &__value {
+    flex: 1;
+    overflow-wrap: anywhere;
+    margin-left: $spacing * 0.2;
+    color: darken($text-color, 20%);
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .details-list {
+    &__row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__label,
+    &__value {
+      flex: none;
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+}
