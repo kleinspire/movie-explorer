@@ -1,5 +1,5 @@
 import { PaginatedMovies } from "../PaginatedMovies/PaginatedMovies";
-import { movieApi } from "../../store";
+import { useMoviesQuery } from "../../store";
 
 /**
  * PopularMovies Component
@@ -19,7 +19,7 @@ export const PopularMovies = ({
 }) => {
   return (
     <PaginatedMovies
-      fetchFunction={movieApi.useMoviesQuery}
+      fetchFunction={useMoviesQuery}
       onMovieSelect={onMovieSelect}
     />
   );

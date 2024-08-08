@@ -21,6 +21,8 @@ vi.doMock("../Pagination/Pagination", () => ({
   Pagination: MockedPagination,
 }));
 
+const mockUsePaginatedMovies = usePaginatedMovies as Mock;
+
 describe("PaginatedMovies", () => {
   const mockMovies: MovieOverview[] = [
     {
@@ -99,7 +101,7 @@ describe("PaginatedMovies", () => {
   it("renders success state correctly", async () => {
     const mockQuery = "action";
 
-    (usePaginatedMovies as Mock).mockReturnValue({
+    mockUsePaginatedMovies.mockReturnValue({
       movies: mockMovies,
       totalPages: mockTotalPages,
       currentPage: mockCurrentPage,
@@ -148,14 +150,14 @@ describe("PaginatedMovies", () => {
     );
 
     // Check that usePaginatedMovies is called with the right props including the query
-    expect(usePaginatedMovies).toHaveBeenCalledWith({
+    expect(mockUsePaginatedMovies).toHaveBeenCalledWith({
       fetchFunction,
       query: mockQuery,
     });
   });
 
   it("renders indeterminate state correctly", async () => {
-    (usePaginatedMovies as Mock).mockReturnValue({
+    mockUsePaginatedMovies.mockReturnValue({
       movies: [],
       isLoading: false,
       isError: false,

@@ -1,14 +1,10 @@
-import {
-  usePaginatedMovies,
-  FetchParams,
-  FetchResult,
-} from "./usePaginatedMovies";
+import { usePaginatedMovies, FetchFunction } from "./usePaginatedMovies";
 import { MoviesList } from "../MoviesList/MoviesList";
 import { Pagination } from "../Pagination/Pagination";
 import "./PaginatedMovies.scss";
 
 interface MoviesDisplayProps<T extends string | null> {
-  fetchFunction: (params: FetchParams<T>) => FetchResult;
+  fetchFunction: FetchFunction<T>;
   query?: T;
   onMovieSelect: (id: number) => void;
 }

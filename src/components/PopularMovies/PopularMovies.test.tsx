@@ -2,12 +2,10 @@ import { render, screen } from "@testing-library/react";
 import { vi, describe, it, expect } from "vitest";
 import { PopularMovies } from "./PopularMovies";
 import { PaginatedMovies } from "../PaginatedMovies/PaginatedMovies";
-import { movieApi } from "../../store";
+import { useMoviesQuery } from "../../store";
 
 vi.mock("../../store", () => ({
-  movieApi: {
-    useMoviesQuery: vi.fn(),
-  },
+  useMoviesQuery: vi.fn(),
 }));
 
 vi.mock("../PaginatedMovies/PaginatedMovies", () => ({
@@ -27,7 +25,7 @@ describe("PopularMovies", () => {
     // Ensure PaginatedMovies is called with the right props
     expect(PaginatedMovies).toHaveBeenCalledWith(
       {
-        fetchFunction: movieApi.useMoviesQuery,
+        fetchFunction: useMoviesQuery,
         onMovieSelect: onMovieSelect,
       },
       {}

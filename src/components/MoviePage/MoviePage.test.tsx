@@ -1,14 +1,12 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { vi, describe, it, expect, Mock } from "vitest";
-import { movieApi } from "../../store";
+import { useMovieQuery } from "../../store";
 import { useImageErrorHandler } from "../../util/useImageErrorHandler";
 
 vi.mock("../../util/useImageErrorHandler");
 
 vi.mock("../../store", () => ({
-  movieApi: {
-    useMovieQuery: vi.fn(),
-  },
+  useMovieQuery: vi.fn(),
 }));
 
 const MockedLayout = vi.fn(({ children }) => <div>{children}</div>);
@@ -31,6 +29,8 @@ vi.doMock("../DetailsList/DetailsList", () => ({
   DetailsList: MockedDetailsList,
 }));
 
+const mockedMovieQuery = useMovieQuery as Mock;
+
 const mockMovie = {
   runtime: 120,
   genres: [{ name: "Action" }, { name: "Adventure" }],
@@ -49,7 +49,7 @@ describe("MoviePage", () => {
   const onClickBack = vi.fn();
 
   it("renders loading state correctly", async () => {
-    (movieApi.useMovieQuery as Mock).mockReturnValue({
+    mockedMovieQuery.mockReturnValue({
       data: null,
       isLoading: true,
       isError: false,
@@ -64,7 +64,7 @@ describe("MoviePage", () => {
   });
 
   it("renders error state correctly", async () => {
-    (movieApi.useMovieQuery as Mock).mockReturnValue({
+    mockedMovieQuery.mockReturnValue({
       data: null,
       isLoading: false,
       isError: true,
@@ -79,7 +79,7 @@ describe("MoviePage", () => {
   });
 
   it("renders success state correctly", async () => {
-    (movieApi.useMovieQuery as Mock).mockReturnValue({
+    mockedMovieQuery.mockReturnValue({
       data: mockMovie,
       isLoading: false,
       isError: false,
@@ -118,7 +118,7 @@ describe("MoviePage", () => {
   });
 
   it("renders indeterminate state correctly", async () => {
-    (movieApi.useMovieQuery as Mock).mockReturnValue({
+    mockedMovieQuery.mockReturnValue({
       data: null,
       isLoading: false,
       isError: false,
@@ -140,7 +140,7 @@ describe("MoviePage", () => {
     const mockHandleImageError = vi.fn();
     (useImageErrorHandler as Mock).mockReturnValue(mockHandleImageError);
 
-    (movieApi.useMovieQuery as Mock).mockReturnValue({
+    mockedMovieQuery.mockReturnValue({
       data: mockMovie,
       isLoading: false,
       isError: false,

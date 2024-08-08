@@ -1,5 +1,5 @@
 import { PaginatedMovies } from "../PaginatedMovies/PaginatedMovies";
-import { movieApi } from "../../store";
+import { useSearchQuery } from "../../store";
 
 /**
  * SearchMovies Component
@@ -22,7 +22,7 @@ export const SearchMovies = ({
 }) => {
   return (
     <PaginatedMovies
-      fetchFunction={movieApi.useSearchQuery}
+      fetchFunction={useSearchQuery}
       query={currentQuery}
       onMovieSelect={onMovieSelect}
     />

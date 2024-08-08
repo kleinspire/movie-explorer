@@ -25,14 +25,13 @@ import "./Button.scss";
  *
  * @returns {JSX.Element} The rendered button component
  */
-export const Button: React.FC<
-  React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({ children, className = "", disabled = false, ...rest }) => (
-  <button
-    disabled={disabled}
-    className={`button ${disabled ? "button--disabled" : ""} ${className}`}
-    {...rest}
-  >
-    {children}
-  </button>
-);
+export const Button: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> =
+  React.memo(({ children, className = "", disabled = false, ...rest }) => (
+    <button
+      disabled={disabled}
+      className={`button ${disabled ? "button--disabled" : ""} ${className}`}
+      {...rest}
+    >
+      {children}
+    </button>
+  ));

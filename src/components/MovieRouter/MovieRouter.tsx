@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { MoviesPage } from "../MoviesPage/MoviesPage";
 import { MoviePage } from "../MoviePage/MoviePage";
 
@@ -15,17 +15,14 @@ import { MoviePage } from "../MoviePage/MoviePage";
 export const MovieRouter = () => {
   const [selectedMovie, setSelectedMovie] = useState<number | null>(null);
 
-  const onMovieSelect = useCallback((id: number) => {
-    setSelectedMovie(id);
-  }, []);
-
-  const onClickBack = useCallback(() => {
-    setSelectedMovie(null);
-  }, []);
-
   return selectedMovie ? (
-    <MoviePage id={selectedMovie} onClickBack={onClickBack} />
+    <MoviePage
+      id={selectedMovie}
+      onClickBack={() => {
+        setSelectedMovie(null);
+      }}
+    />
   ) : (
-    <MoviesPage onMovieSelect={onMovieSelect} />
+    <MoviesPage onMovieSelect={(id: number) => setSelectedMovie(id)} />
   );
 };

@@ -1,16 +1,20 @@
 import { useState, useMemo } from "react";
 import { MovieListResponse } from "../../types";
 
-export type FetchParams<T extends string | null> = T extends string
+type FetchParams<T extends string | null> = T extends string
   ? { page: number; query: T }
   : { page: number };
 
-export type FetchResult = {
+type FetchResult = {
   data?: MovieListResponse;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
 };
+
+export type FetchFunction<T extends string | null> = (
+  params: FetchParams<T>
+) => FetchResult;
 
 /**
  * usePaginatedMovies Hook
@@ -60,7 +64,7 @@ export const usePaginatedMovies = <T extends string | null>({
   fetchFunction,
   query,
 }: {
-  fetchFunction: (params: FetchParams<T>) => FetchResult;
+  fetchFunction: FetchFunction<T>;
   query?: T;
 }) => {
   const [currentPage, setCurrentPage] = useState(1);

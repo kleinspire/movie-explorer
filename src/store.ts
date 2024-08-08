@@ -44,15 +44,16 @@ export const movieApi = createApi({
   endpoints: (builder) => ({
     movies: builder.query<MovieListResponse, { page: number }>({
       query: ({ page }) => `movies?page=${page}`,
-      providesTags: [{ type: "MovieListResponse", id: "LIST" }],
     }),
     movie: builder.query<MovieDetails, { id: number }>({
       query: ({ id }) => `movie/${id}`,
-      providesTags: (_result, _error, { id }) => [{ type: "MovieDetails", id }],
     }),
     search: builder.query<MovieListResponse, { query: string; page: number }>({
       query: ({ query, page }) => `search/?query=${query}&page=${page}`,
-      providesTags: [{ type: "MovieListResponse", id: "LIST" }],
     }),
   }),
 });
+
+export const useMoviesQuery = movieApi.useMoviesQuery;
+export const useMovieQuery = movieApi.useMovieQuery;
+export const useSearchQuery = movieApi.useSearchQuery;

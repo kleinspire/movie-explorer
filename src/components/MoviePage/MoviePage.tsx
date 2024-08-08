@@ -1,5 +1,5 @@
 import "./MoviePage.scss";
-import { movieApi } from "../../store";
+import { useMovieQuery } from "../../store";
 import { Layout } from "../Layout/Layout";
 import { Button } from "../Button/Button";
 import { DetailsList } from "../DetailsList/DetailsList";
@@ -26,12 +26,7 @@ export const MoviePage = ({
   id: number;
   onClickBack: () => void;
 }) => {
-  const {
-    data: movie,
-    isLoading,
-    isError,
-    isSuccess,
-  } = movieApi.useMovieQuery({ id });
+  const { data: movie, isLoading, isError, isSuccess } = useMovieQuery({ id });
   const handleImageError = useImageErrorHandler();
 
   if (isLoading) return "loading...";
